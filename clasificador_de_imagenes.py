@@ -36,3 +36,21 @@ plt.figure()
 plt.imshow(imagen, cmap=plt.cm.binary)
 plt.grid(False)
 plt.show()
+
+
+# crear el modelo 
+
+modelo = tf.keras.Sequential([
+    tf.keras.layers.Flatten(input_shape=(28,28,1)), # 1 - blanco y negro
+    tf.keras.Dense(50, activation=tf.nn.relu),
+    tf.keras.Dense(50, activation=tf.nn.relu),
+    tf.keras.Dense(10, activation=tf.nn.softmax), # para redes de clasificacion
+])
+
+# Compilar el modelo
+
+modelo.compile(
+    optimizer='adam',
+    loss=tf.keras.losses.SparseCategoricalCrossentropy(),
+    matrics=['accuracy']
+)
